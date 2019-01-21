@@ -1,11 +1,11 @@
 const autoprefixer = require('autoprefixer');
 
 module.exports = [{
-    entry: './scss/app.scss',
+    entry: ['./scss/app.scss','./scripts/app.js'],
     output: {
         // This is necessary for webpack to compile
         // But we never use style-bundle.js
-        filename: 'style-bundle.js',
+        filename: 'aplicacion.js',
     },
     module: {
         rules: [
@@ -32,6 +32,14 @@ module.exports = [{
                         }
                     },
                 ]
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015'],
+                    plugins: ['transform-object-assign']
+                },
             }
         ]
     },

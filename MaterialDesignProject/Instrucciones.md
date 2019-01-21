@@ -90,7 +90,9 @@ module.exports = [{
 
 
 
-Paso 2: Incluye CSS for a para un componente
+### Paso 2: Incluye CSS for a para un componente
+
+
 
 `npm install --save-dev @material/button`
 
@@ -145,8 +147,11 @@ Cambia tu index.html a
 ```
 
 
+### Paso 3: Webpack with ES2015
 
+Instalación de ES2015 o ES5
 
+`npm install --save-dev babel-core@6 babel-loader@7 babel-preset-es2015 babel-plugin-transform-object-assign`
 
 
 
