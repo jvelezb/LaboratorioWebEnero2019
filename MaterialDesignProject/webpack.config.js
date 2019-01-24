@@ -19,20 +19,20 @@ function getStyleUse(bundleFilename) {
 
 module.exports = [
   {
-    entry: './login.scss',
+    entry: './styles/login.scss',
     output: {
-      // This is necessary for webpack to compile, but we never reference this js file.
+
       filename: 'style-bundle-login.js',
     },
     module: {
       rules: [{
         test: /login.scss$/,
-        use: getStyleUse('bundle-login.css')
+        use: getStyleUse('/css/bundle-login.css')
       }]
     },
   },
   {
-    entry: './home.scss',
+    entry: './styles/home.scss',
     output: {
       // This is necessary for webpack to compile, but we never reference this js file.
       filename: 'style-bundle-home.js',
@@ -40,12 +40,12 @@ module.exports = [
     module: {
       rules: [{
         test: /home.scss$/,
-        use: getStyleUse('bundle-home.css')
+        use: getStyleUse('/css/bundle-home.css')
       }]
     },
   },
   {
-    entry: "./login.js",
+    entry: "./scripts/login.js",
     output: {
       filename: "bundle-login.js"
     },
@@ -58,9 +58,9 @@ module.exports = [
     },
   },
   {
-    entry: "./home.js",
+    entry: "./scripts/home.js",
     output: {
-      filename: "bundle-home.js"
+      filename: "./scripts/bundle-home.js"
     },
     module: {
       loaders: [{
