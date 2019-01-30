@@ -47,6 +47,20 @@ module.exports = [
     },
   },
   {
+    entry: './scss/edit-users.scss',
+    output: {
+      // This is necessary for webpack to compile, but we never reference this js file.
+      path: __dirname + '/dist-css',
+      filename: 'style-bundle-edit-users.js',
+    },
+    module: {
+      rules: [{
+        test: /edit-users.scss$/,
+        use: getStyleUse('bundle-edit-users.css')
+      }]
+    },
+  },
+  {
     entry: "./js/login.js",
     output: {
       path: __dirname + '/dist-js',
@@ -73,5 +87,19 @@ module.exports = [
         query: {presets: ['env']}
       }]
     },
-  }
+  },
+  {
+    entry: "./js/edit-users.js",
+    output: {
+      path: __dirname + '/dist-js',
+      filename: "bundle-edit-users.js"
+    },
+    module: {
+      loaders: [{
+        test: /edit-users.js$/,
+        loader: 'babel-loader',
+        query: {presets: ['env']}
+      }]
+    },
+  },
 ];
