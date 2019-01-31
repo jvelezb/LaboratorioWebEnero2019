@@ -19,34 +19,51 @@ function getStyleUse(bundleFilename) {
 
 module.exports = [
   {
-    entry: './styles/login.scss',
+    entry: './scss/login.scss',
     output: {
-
+      // This is necessary for webpack to compile, but we never reference this js file.
+      path: __dirname + '/dist-css',
       filename: 'style-bundle-login.js',
     },
     module: {
       rules: [{
         test: /login.scss$/,
-        use: getStyleUse('/css/bundle-login.css')
+        use: getStyleUse('bundle-login.css')
       }]
     },
   },
   {
-    entry: './styles/home.scss',
+    entry: './scss/home.scss',
     output: {
       // This is necessary for webpack to compile, but we never reference this js file.
       filename: 'style-bundle-home.js',
+      path: __dirname + '/dist-css',
     },
     module: {
       rules: [{
         test: /home.scss$/,
-        use: getStyleUse('/css/bundle-home.css')
+        use: getStyleUse('bundle-home.css')
       }]
     },
   },
   {
-    entry: "./scripts/login.js",
+    entry: './scss/edit-users.scss',
     output: {
+      // This is necessary for webpack to compile, but we never reference this js file.
+      path: __dirname + '/dist-css',
+      filename: 'style-bundle-edit-users.js',
+    },
+    module: {
+      rules: [{
+        test: /edit-users.scss$/,
+        use: getStyleUse('bundle-edit-users.css')
+      }]
+    },
+  },
+  {
+    entry: "./js/login.js",
+    output: {
+      path: __dirname + '/dist-js',
       filename: "bundle-login.js"
     },
     module: {
@@ -58,9 +75,10 @@ module.exports = [
     },
   },
   {
-    entry: "./scripts/home.js",
+    entry: "./js/home.js",
     output: {
-      filename: "./scripts/bundle-home.js"
+      filename: "bundle-home.js",
+      path: __dirname + '/dist-js'
     },
     module: {
       loaders: [{
@@ -69,5 +87,19 @@ module.exports = [
         query: {presets: ['env']}
       }]
     },
-  }
+  },
+  {
+    entry: "./js/edit-users.js",
+    output: {
+      path: __dirname + '/dist-js',
+      filename: "bundle-edit-users.js"
+    },
+    module: {
+      loaders: [{
+        test: /edit-users.js$/,
+        loader: 'babel-loader',
+        query: {presets: ['env']}
+      }]
+    },
+  },
 ];

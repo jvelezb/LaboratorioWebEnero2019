@@ -13,6 +13,15 @@
   fill: currentColor;
 }
 
+.shrine-login {
+  background-color: $mdc-theme-background;
+  color: $mdc-theme-on-background;
+}
+
+.cancel {
+  @include mdc-button-ink-color(on-surface);
+}
+
 .username,
 .password {
   display: block;
