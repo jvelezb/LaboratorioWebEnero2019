@@ -2,6 +2,7 @@
 var assert    = require("chai").assert;
 
 
+
 describe('Login page', () => {
     it('should have the right title', () => {
         browser.url('/');
@@ -15,6 +16,28 @@ describe('Get input of login page ', () => {
         browser.url('/');
         const user= $('#username-input');
            user.setValue('juan@tec.mx');
+        const pass = $('#password-input');
+        pass.setValue('pass2');
+        assert.equal(pass.getValue(),'pass2');
+        assert.equal(user.getValue(),'juan@tec.mx');
+
+
+    });
+});
+
+
+
+
+describe('Get input of login page 2 ', () => {
+    it('should inputo data ', () => {
+        browser.options({
+            browserName: 'chrome', // options: `firefox`, `chrome`, `opera`, `safari`
+            browserVersion: '27.0', // browser version
+            platformName: 'Windows 10' // OS platform
+        });
+        browser.url('/');
+        const user= $('#username-input');
+        user.setValue('juan@tec.mx');
         const pass = $('#password-input');
         pass.setValue('pass2');
         assert.equal(pass.getValue(),'pass2');

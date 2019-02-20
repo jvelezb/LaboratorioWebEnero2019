@@ -47,13 +47,39 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            // to run chrome headless the following flags are required
+            // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
+            // args: ['--headless', '--disable-gpu'],
+            //"mobileEmulation":{"deviceName": "Nexus 5"},
+            "mobileEmulation":{"deviceName": "iPhone 8 Plus"},
+
+            /*"mobileEmulation" : {
+                "deviceMetrics": { "width": 360, "height": 640, "pixelRatio": 3.0 },
+                "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19" }
+            */
+
+        }
+    }, {
+        // maxInstances can get overwritten per capability. So if you have an in house Selenium
+        // grid with only 5 firefox instance available you can make sure that not more than
+        // 5 instance gets started at a time.
         maxInstances: 5,
-        //
-        browserName: 'firefox'
-    }],
+        browserName: 'firefox',
+        "moz:firefoxOptions": {
+            // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
+            args: ['-headless'],
+            'mobileEmulation': {
+
+            }
+        }
+    },
+        {
+            maxInstances: 5,
+            browserName: 'safari'
+        }
+    ],
     //
     // ===================
     // Test Configurations
@@ -75,6 +101,7 @@ exports.config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     baseUrl: 'http://localhost:8080',
+
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -90,7 +117,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    //services: ['selenium-standalone'],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
@@ -98,11 +125,12 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
+
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    // reporters: ['dot'],
+     reporters: ['dot','spec'],
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
