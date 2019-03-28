@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import ProyectoStore from '../stores/ProyectoStore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 
 const styles = theme => ({
@@ -33,9 +35,11 @@ class AgregarElementoComponent extends React.Component{
 
 	constructor(props){
 		super(props);
+
 		this.state = {
 			item: this.obtenerElementoVacio()//elemento capturado
 		};
+		this._remoto.bind(this);
 	}
 
 	obtenerElementoVacio(){
@@ -62,8 +66,10 @@ class AgregarElementoComponent extends React.Component{
 	_addNewItem(event) {
 
 		event.preventDefault();
-		this.state.item.descripcion = this.state.item.descripcion || '-';
-		this.state.item.precio = this.state.item.precio || '0';
+		this.state.item.matricula = this.state.item.matricula || '-';
+		this.state.item.apellido = this.state.item.apellido || '-';
+		this.state.item.nombre = this.state.item.nombre || '-';
+		this.state.item.calificacion = this.state.item.calificacion || 0;
 		ProyectoActions.agregarElemento(this.state.item);
 		console.log(this.state.item);
 		this.setState({ item : this.obtenerElementoVacio() });
@@ -71,10 +77,9 @@ class AgregarElementoComponent extends React.Component{
 
 
 	_remoto(event) {
-
-			
+		
 			ProyectoActions.remoto();
-			console.log(this.state.item);
+
 			
 	}
 
@@ -82,25 +87,36 @@ render() {
 		const { classes } = this.props;
 
 		return (
-			<div>
-		
-				<h3 className="total">${ProyectoStore.getSuma()}</h3>
-					<form id="myform" className="form-inline add-item" onSubmit={this._addNewItem.bind(this)}><br/>
-				  		<TextField id="descripcion" label="Descripción" defaultValue={this.state.item.descripcion}  margin="normal" name="descripcion" onChange={this._actualizarEstado.bind(this)} value={this.state.value}/><br/>
-                        <TextField id="precio" label="Precio"   margin="normal" name="precio" onChange={this._actualizarEstado.bind(this)} value={this.state.value}/>
-						
-					    <Button variant="contained" component="span" className={classes.button} onClick={this._addNewItem.bind(this)}>
+			<React.Fragment>
+					<Typography variant="h6" gutterBottom>
+						Calificaciones: promedio de grupo {ProyectoStore.getPromedio()}
+					</Typography>
 
-					     
-				          Add
-				         
+					<form id="myform" className="form-inline add-item" >
+						<Grid container spacing={24}>
+							<Grid item xs={12} sm={6}>
+								<TextField id="matricula" label="Matricula"   margin="normal" name="matricula" onChange={this._actualizarEstado.bind(this)} fullWidth value={this.state.value}/>
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<TextField id="nombre" label="Nombre"   margin="normal" name="nombre" onChange={this._actualizarEstado.bind(this)} value={this.state.value} fullWidth/><br/>
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								 <TextField id="apellido" label="Apellido"   margin="normal" name="apellido" onChange={this._actualizarEstado.bind(this)} fullWidth value={this.state.value}/>
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<TextField id="calificacion" label="Calificacion"   margin="normal" name="calificacion" onChange={this._actualizarEstado.bind(this)} fullWidth value={this.state.value}/>
+							</Grid>
+						</Grid>
+								 <Button variant="contained" component="span" className={classes.button} onClick={this._addNewItem.bind(this)}>
+				          Registrar
 				        </Button>
 				         <Button variant="contained" component="span" className={classes.button} onClick={this._remoto.bind(this)}>
-				         	remoto
+				         	Remoto
 				         </Button>
 					</form>
-			}
-			</div>
+
+			</React.Fragment>
+
 		)
 	}
 }

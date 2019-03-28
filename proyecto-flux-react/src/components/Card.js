@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-//import IMG from './MZ.png';
+
 
 const styles = {
   card: {
@@ -20,7 +20,7 @@ const styles = {
     height: 140,
   },
 };
-///https://pastebin.com/VYLLm1Rv
+
 function MediaCard(props) {
   const { classes } = props;
   return (

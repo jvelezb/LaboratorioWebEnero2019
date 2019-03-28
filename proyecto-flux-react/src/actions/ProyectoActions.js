@@ -1,6 +1,6 @@
 import Dispatcher from '../dispatchers';
 import ActionTypes from '../constants';
-import RemoteAPI from '../utils';
+
 
 class ProyectoActions{
 		agregarElemento(item){
@@ -13,10 +13,9 @@ class ProyectoActions{
 		remoto(){
     		Dispatcher.dispatch({
         		actionType: ActionTypes.INITIALISE,
-        		initialData: {
-            	bill: RemoteAPI.get() // I switch to getBillServer for date from server
-        }
-    });
+
+       		 }
+    	);
 }
 
 }

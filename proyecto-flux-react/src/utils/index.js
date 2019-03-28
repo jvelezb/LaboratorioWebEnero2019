@@ -1,20 +1,16 @@
+var request = require("request");
 
+export  async function obtener(people) {
+    try {
+        let resultado ='';
+          fetch('https://swapi.co/api/people/'+people+'/').then((response)=> {
+           console.log(response);
+           resultado =   response;
 
-var request = require('superagent');
-
-var RemoteAPI = {
-
-  get: function() {
-    request.get('https://api.github.com/')
-    	.set('Access-Control-Allow-Origin', '*')
-      .set('Accept', 'application/json')
-      .withCredentials()
-      .end(function(err, response) {
-        if (err) return console.error(err);
-
-        console.log(response.body);
-      });
-  }
+       });
+          console.log(resultado);
+          return resultado
+    } catch (err) {
+        console.error(err);
+    }
 };
-
-module.exports = RemoteAPI;

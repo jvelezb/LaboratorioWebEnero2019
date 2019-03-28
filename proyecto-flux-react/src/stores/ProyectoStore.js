@@ -1,7 +1,7 @@
 //ProyectoStore
 import { EventEmitter } from 'events';
 import  Dispatcher from '../dispatchers';
-
+import {obtener} from '../utils';
 let listado = [];
 
 class ProyectoStore extends EventEmitter{
@@ -17,12 +17,23 @@ class ProyectoStore extends EventEmitter{
 						this.agregarElemento(action.payload);
 						break;
 					case 'INITIALISE':
-						this.emit("CAMBIO");
+						 this.llamarRemote();
+
 						break;
 
 				} 
 			}
 
+
+
+			async llamarRemote(){
+				 await obtener(Math.round(Math.random() * 10+1)).then(x=>{
+					  console.log(x);
+				  });
+
+
+
+			}
 			
 
 
@@ -41,18 +52,17 @@ class ProyectoStore extends EventEmitter{
 			}
 
 			removeChangeListener(callback){
-				
 				this.removeListener("CAMBIO", callback);
 			}
 
 
-			getSuma() {
+			getPromedio() {
 				let totalBudget = 0;
 				listado.forEach((item) => {
-					totalBudget += parseFloat(item.precio);
+					totalBudget += parseFloat(item.calificacion);
 				});
-
-				return totalBudget;
+				var promedio = totalBudget/listado.size
+				return isNaN(promedio)? '  - ': promedio;
 			}
 }
 
