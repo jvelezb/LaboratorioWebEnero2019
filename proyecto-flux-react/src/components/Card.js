@@ -23,17 +23,19 @@ const styles = {
 
 function MediaCard(props) {
   const { classes } = props;
+
   return (
+
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}  title="Alumnos"/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Saludos a todos
+            Saludos a todos {props.alumno}
           </Typography>
           <Typography component="p">
-            Esto es el componente
+            componente
           </Typography>
         </CardContent>
       </CardActionArea>

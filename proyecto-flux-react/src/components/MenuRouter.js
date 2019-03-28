@@ -72,6 +72,7 @@ function Topic({ match }) {
     return (
         <div>
             <h3>{match.params.matricula}</h3>
+            <MediaCard alumno={match.params.matricula}/>
         </div>
     );
 }
