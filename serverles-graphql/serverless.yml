@@ -1,0 +1,47 @@
+service: api-alumnos-clase
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:Scan
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  busqueda:
+    handler: functions/consulta.query
+    description: api funcion    buscar alumnos
+    memorySize: 1024 
+    events:
+      - http:
+          path: searchStudents
+          method: get
+
+  lista:
+    handler: functions/consulta.queryList
+    description: api funcion    buscar alumnos
+    memorySize: 1024 
+    events:
+      - http:
+          path: listStudents
+          method: get
+
+resources:
+  Resources:
+    AlumnosTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        BillingMode : 'PAY_PER_REQUEST'
+        AttributeDefinitions:
+          - AttributeName: matricula
+            AttributeType: S
+        KeySchema:
+          - AttributeName: matricula
+            KeyType: HASH
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
